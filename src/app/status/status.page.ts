@@ -13,19 +13,20 @@ import { Router } from '@angular/router';
 })
 export class StatusPage implements OnInit {
   myStatus: string = '';
-
+// Method to save the current status value into storage
   async onSave(){
     console.log(this.myStatus);
     await this.storage.create();
     await this.storage.set('status', this.myStatus);
     this.router.navigate(['/home']);
   }
+  // Ionic lifecycle hook that runs every time the view is about to enter
   async ionViewWillEnter(){
     await this.storage.create();
     this.myStatus =  await this.storage.get('status');
   }
-  constructor(private storage:Storage, private router:Router) { }
-
+  constructor(private storage:Storage, private router:Router) { }// Constructor injecting the Ionic Storage service and Angular Router
+// Angular lifecycle hook called once after component is initialized
   ngOnInit() {
   }
 
